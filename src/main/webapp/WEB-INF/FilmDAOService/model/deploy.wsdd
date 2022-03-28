@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FilmDAOService WSDL service -->
+
+  <service name="FilmDAO" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://model"/>
+      <parameter name="wsdlServiceElement" value="FilmDAOService"/>
+      <parameter name="schemaQualified" value="http://model"/>
+      <parameter name="wsdlServicePort" value="FilmDAO"/>
+      <parameter name="className" value="model.FilmDAO"/>
+      <parameter name="wsdlPortType" value="FilmDAO"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://model" xmlns:retNS="http://model" xmlns:rtns="http://model" xmlns:tns="http://model" name="getFilm" qname="operNS:getFilm" returnQName="retNS:getFilmReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" xmlns:pns="http://model" qname="pns:name" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://model" name="insertFilm" qname="operNS:insertFilm" soapAction="">
+        <parameter xmlns:pns="http://model" xmlns:tns="http://model" qname="pns:f" type="tns:Film"/>
+      </operation>
+      <operation xmlns:operNS="http://model" name="updateFilm" qname="operNS:updateFilm" soapAction="">
+        <parameter xmlns:pns="http://model" xmlns:tns="http://model" qname="pns:f" type="tns:Film"/>
+      </operation>
+      <operation xmlns:operNS="http://model" xmlns:retNS="http://model" xmlns:rtns="http://model" name="getFilmByID" qname="operNS:getFilmByID" returnQName="retNS:getFilmByIDReturn" returnType="rtns:Film" soapAction="">
+        <parameter xmlns:pns="http://model" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://model" xmlns:retNS="http://model" xmlns:rtns="http://model" xmlns:tns="http://model" name="getAllFilms" qname="operNS:getAllFilms" returnQName="retNS:getAllFilmsReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://model" name="deleteFilm" qname="operNS:deleteFilm" soapAction="">
+        <parameter xmlns:pns="http://model" xmlns:tns="http://model" qname="pns:f" type="tns:Film"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAllFilms getFilm getFilmByID deleteFilm updateFilm insertFilm"/>
+
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;deleteFilm" type="java:model.DeleteFilm" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:Film" type="java:model.Film" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://model" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;insertFilm" type="java:model.InsertFilm" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;deleteFilmResponse" type="java:model.DeleteFilmResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;updateFilmResponse" type="java:model.UpdateFilmResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;getAllFilms" type="java:model.GetAllFilms" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;updateFilm" type="java:model.UpdateFilm" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;getFilmResponse" type="java:model.GetFilmResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;getAllFilmsResponse" type="java:model.GetAllFilmsResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;getFilm" type="java:model.GetFilm" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;getFilmByIDResponse" type="java:model.GetFilmByIDResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;getFilmByID" type="java:model.GetFilmByID" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:&gt;insertFilmResponse" type="java:model.InsertFilmResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
